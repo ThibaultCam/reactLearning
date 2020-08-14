@@ -9,21 +9,25 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props)
-    this.searchedText = ""
-    this.page = 0
-    this.totalPages = 0
+    this.searchedText = '';
+    this.page = 0;
+    this.totalPages = 0;
     this.state = {
       films: [],
       isLoading: false
     }
   }
 
+  _displayDetailForFilm = (idFilm) => {
+    this.props.navigation.navigate('FilmDetail', { idFilm: idFilm });
+  }
+
   _loadFilms() {
     if (this.searchedText.length > 0) {
       this.setState({ isLoading: true })
       getFilmsFromApiWithSearchedText(this.searchedText, this.page+1).then(data => {
-          this.page = data.page
-          this.totalPages = data.total_pages
+          this.page = data.page;
+          this.totalPages = data.total_pages;
           this.setState({
             films: [ ...this.state.films, ...data.results ],
             isLoading: false
@@ -33,16 +37,16 @@ class Search extends React.Component {
   }
 
   _searchTextInputChanged(text) {
-    this.searchedText = text 
+    this.searchedText = text;
   }
 
   _searchFilms() {
-    this.page = 0
-    this.totalPages = 0
+    this.page = 0;
+    this.totalPages = 0;
     this.setState({
       films: [],
     }, () => {
-        this._loadFilms()
+        this._loadFilms();
     })
   }
 
@@ -69,11 +73,11 @@ class Search extends React.Component {
         <FlatList
           data={this.state.films}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => <FilmItem film={item}/>}
+          renderItem={({item}) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm}/>}
           onEndReachedThreshold={0.5}
           onEndReached={() => {
               if (this.page < this.totalPages) {
-                 this._loadFilms()
+                 this._loadFilms();
               }
           }}
         />
@@ -86,7 +90,6 @@ class Search extends React.Component {
 const styles = StyleSheet.create({
   main_container: {
     flex: 1,
-    marginTop: 20
   },
   textinput: {
     marginLeft: 5,
