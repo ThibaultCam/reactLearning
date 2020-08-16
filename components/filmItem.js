@@ -1,21 +1,34 @@
 // Components/FilmItem.js
 
-import React from './node_modules/react'
+import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 
 import { getImageFromApi } from '../API/TMDBApi'
 
 class FilmItem extends React.Component {
+
+    _displayFavoriteImage(isFav) {
+        if (isFav) {
+            return (
+                <Image
+                    style={styles.favorite_image}
+                    source={require('../Assets/ic_favorite.png')}
+                />
+            )
+        }
+    }
+
     render() {
-        const { film, displayDetailForFilm } = this.props;
+        const { film, displayDetailForFilm, isFavoritesFilm } = this.props;
         return (
             <TouchableOpacity style={styles.main_container} onPress={() => displayDetailForFilm(film.id)}>
                 <Image
                     style={styles.image}
-                    source={{uri: getImageFromApi(film.poster_path)}}
-                    />
+                    source={{ uri: getImageFromApi(film.poster_path) }}
+                />
                 <View style={styles.content_container}>
                     <View style={styles.title}>
+                        {this._displayFavoriteImage(isFavoritesFilm)}
                         <Text style={styles.title_text}>{film.title}</Text>
                         <Text style={styles.title_note}>{film.vote_average}</Text>
                     </View>
@@ -46,6 +59,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexWrap: 'wrap',
         paddingRight: 5
+    },
+    favorite_image: {
+        height: 20,
+        width: 20,
+        marginRight: 5,
+        marginTop: 3
     },
     title_note: {
         fontWeight: 'bold',
