@@ -1,9 +1,9 @@
 // Components/FilmDetail.js
 
-import React from 'react'
+import React from './node_modules/react'
 import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image } from 'react-native'
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi'
-import moment from 'moment';
+import moment from './node_modules/moment';
 import numeral from 'numeral';
 
 
@@ -40,13 +40,12 @@ class FilmDetail extends React.Component {
   }
 
   _calculateBudget(rev) {
-    return numeral(rev).format('0,0[.]00 $')
+    return numeral(rev).format('0,0[.]00 $');
   }
 
   _separateList(list) {
     let string = '';
     for (const child of list) {
-      console.log(child.name);
       string += child.name + ' / ';
     }
     return string.substring(0, string.length - 2);

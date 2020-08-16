@@ -2,8 +2,8 @@
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
-import Search from '../components/search';
-import FilmDetail from '../components/filmDetail'
+import Search from '../Components/Search';
+import FilmDetail from '../Components/FilmDetail'
 
 const SearchStackNavigator = createStackNavigator({
   Search: {

@@ -1,6 +1,6 @@
 // Components/FilmItem.js
 
-import React from 'react'
+import React from './node_modules/react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 
 import { getImageFromApi } from '../API/TMDBApi'

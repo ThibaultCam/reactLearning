@@ -1,8 +1,8 @@
 // Components/Search.js
 
-import React from 'react'
+import React from './node_modules/react'
 import { StyleSheet, View, TextInput, Button, Text, FlatList, ActivityIndicator } from 'react-native'
-import FilmItem from './filmItem'
+import FilmItem from './FilmItem'
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi'
 
 class Search extends React.Component {
