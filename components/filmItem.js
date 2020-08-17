@@ -19,7 +19,7 @@ class FilmItem extends React.Component {
     }
 
     render() {
-        const { film, displayDetailForFilm, isFavoritesFilm } = this.props;
+        const { film, displayDetailForFilm, isFilmFavorite } = this.props;
         return (
             <TouchableOpacity style={styles.main_container} onPress={() => displayDetailForFilm(film.id)}>
                 <Image
@@ -28,7 +28,7 @@ class FilmItem extends React.Component {
                 />
                 <View style={styles.content_container}>
                     <View style={styles.title}>
-                        {this._displayFavoriteImage(isFavoritesFilm)}
+                        {this._displayFavoriteImage(isFilmFavorite)}
                         <Text style={styles.title_text}>{film.title}</Text>
                         <Text style={styles.title_note}>{film.vote_average}</Text>
                     </View>
